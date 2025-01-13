@@ -2,6 +2,7 @@
 using CoreUtility.Extensions;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Tools {
     public static class AnchorConverter 
@@ -10,8 +11,7 @@ namespace Tools {
         [MenuItem("Tools/Convert To Anchors")]
         public static void SetAnchorsBasedOnPosition() {
             var selectedObjects = Selection.gameObjects;
-            if (selectedObjects.Length == 0) 
-                return;
+            Assert.IsTrue(selectedObjects.Length != 0, "Select some object");
 
             foreach (var selectedObject in selectedObjects) {
                 var rectTransform = selectedObject.GetComponent<RectTransform>();
@@ -23,12 +23,16 @@ namespace Tools {
                                 Mathf.Approximately(rectTransform.anchorMax.x, 0.5f) &&
                                 Mathf.Approximately(rectTransform.anchorMax.y, 0.5f);
 
-                if (!isCenter) 
+                if (!isCenter) {
+                    Debug.LogWarning("Is not in center, use the middle center mode and next again use converter");
                     continue;
-
+                }
+                
                 var parentRectTransform = rectTransform.parent as RectTransform;
-                if (parentRectTransform == null) 
+                if (parentRectTransform == null) {
+                    Debug.LogWarning("Cannot convert without parent");
                     continue;
+                }
                 
                 var parentSize = parentRectTransform.rect.size;
                 var position = rectTransform.anchoredPosition;
