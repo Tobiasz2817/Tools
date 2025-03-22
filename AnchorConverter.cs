@@ -49,14 +49,22 @@ namespace Tools {
                     (position.x + size.x * (1 - pivot.x)) / parentSize.x + pivot.x,
                     (position.y + size.y * (1 - pivot.y)) / parentSize.y + pivot.y
                 );
-
-                rectTransform.anchorMin = anchorMin.Round(5);
-                rectTransform.anchorMax = anchorMax.Round(5);
+                
+                const int DecimalMax = 3;
+                rectTransform.anchorMin = anchorMin.Round(DecimalMax);
+                rectTransform.anchorMax = anchorMax.Round(DecimalMax);
                 
                 rectTransform.localPosition = originalPosition;
                 
                 rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Round(size.x));
                 rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Round(size.y));
+                
+                const int ResetLoop = 3;
+                for (int i = 0; i < ResetLoop; i++)
+                {
+                    rectTransform.offsetMin = Vector2.zero;
+                    rectTransform.offsetMax = Vector2.zero;
+                }
             }
         }
     }
