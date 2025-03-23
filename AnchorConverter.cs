@@ -8,7 +8,7 @@ namespace Tools {
     public static class AnchorConverter 
     {
         //TODO: Fix issue weird values after conversion ("-2.002001e-0")
-        [MenuItem("Tools/Convert To Anchors")]
+        [MenuItem("Tools/Convert To Anchors #l")]
         public static void SetAnchorsBasedOnPosition() {
             var selectedObjects = Selection.gameObjects;
             Assert.IsTrue(selectedObjects.Length != 0, "Select some object");
