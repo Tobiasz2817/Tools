@@ -1,14 +1,19 @@
 #if UNITY_EDITOR
 using CoreUtility.Extensions;
+using UnityEngine.Assertions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Tools {
     public static class AnchorConverter 
     {
-        //TODO: Fix issue weird values after conversion ("-2.002001e-0")
-        [MenuItem("Tools/Convert To Anchors #l")]
+        /// <summary>
+        /// Adjust anchors based on width and height rect transform
+        /// Support multiple selections
+        /// Objects must be in center mode  
+        /// Usage: Select objects and press shift + m or use it from Tools/Anchors -> Convert To Anchors
+        /// </summary>
+        [MenuItem("Tools/Anchors/Convert To Anchors #l")]
         public static void SetAnchorsBasedOnPosition() {
             var selectedObjects = Selection.gameObjects;
             Assert.IsTrue(selectedObjects.Length != 0, "Select some object");
@@ -29,7 +34,7 @@ namespace Tools {
                 }
                 
                 var parentRectTransform = rectTransform.parent as RectTransform;
-                if (parentRectTransform == null) {
+                if (!parentRectTransform) {
                     Debug.LogWarning("Cannot convert without parent");
                     continue;
                 }
