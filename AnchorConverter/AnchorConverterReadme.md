@@ -1,8 +1,8 @@
 # AnchorConverter
 
-Asuming you propably will ask why i need this. 
-So the answer is because thanks for anchors gives you good scaling interface with resoultion.
-Converter manipulate the anchors based on width and height object. With simply bind option it boost up creation process with of course a good practice making ui. 
+Asuming you propably will **ask why i need this**.  
+So the answer is because the anchors gives you good scaling interface with resoultion.
+Converter manipulate the anchors based on width and height object. With simply bind option it boost up creation process with of course a good practice of making ui. 
 
 How to use: 
 ## Step 1: Create element UI
