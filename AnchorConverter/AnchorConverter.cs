@@ -1,5 +1,4 @@
 #if UNITY_EDITOR
-using CoreUtility.Extensions;
 using UnityEngine.Assertions;
 using UnityEditor;
 using UnityEngine;

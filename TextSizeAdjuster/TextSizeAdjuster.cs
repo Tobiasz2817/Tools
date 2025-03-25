@@ -1,5 +1,4 @@
 using UnityEngine.Assertions;
-using CoreUtility.Extensions;
 using UnityEditor;
 using System.Linq;
 using UnityEngine;
@@ -27,7 +26,10 @@ namespace Tools {
                 FirstOrDefault();
 
             Assert.IsNotNull(coreTMP, "Core target must be tmp pro and must be selected as first");
-
+            
+            const float MinAnchorValue = 0f;
+            const float MaxAnchorValue = 1f;
+            
             // Temporary solution -> Move to window editor
             const float SubtractValue = 0.0001f;
             // Range 0 - 1
@@ -35,9 +37,8 @@ namespace Tools {
             const float MaxYAnchor = 0.8f;
             const float MinXAnchor = 0.49f;
             const float MaxXAnchor = 0.51f;
-
-            const float MinAnchorValue = 0f;
-            const float MaxAnchorValue = 1f;
+            
+            const int DecimalMax = 4;
             
             float fontSize = coreTMP.fontSize;
             for (int i = 0; i < selections.Length; i++) {
@@ -71,6 +72,9 @@ namespace Tools {
                     targetTMP.ForceMeshUpdate();
                     EditorUtility.SetDirty(targetTMP);
                 }
+                
+                targetTMP.rectTransform.RoundAnchors(DecimalMax);
+                targetTMP.ForceMeshUpdate();
                 
                 Undo.RecordObject(target, "Auto Font Size");
             }
